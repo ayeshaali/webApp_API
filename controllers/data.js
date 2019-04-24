@@ -12,10 +12,10 @@ router.get('/search', function(request, response) {
 })
 
 router.get('/mysaved', function(request, response) {
-    Saved.getSave();
+    var arr = Saved.getSave();
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
-    response.render('mysaved');
+    response.render('mysaved', {data:arr});
 })
 
 router.post("/jobs", function(req,res){
@@ -23,7 +23,7 @@ router.post("/jobs", function(req,res){
       if(!err){
         var data = JSON.parse(body);
         Saved.savedInfo(data,"benefits", function(response)){
-          res.render('mysaved.ejs', {movie: response})
+          res.render('mysaved.ejs', {data: response})
         };
       }
       else{
@@ -38,7 +38,7 @@ router.post("/benefits", function(request,response){
       if(!err){
         var data = JSON.parse(body);
         Saved.savedInfo(data,"benefits", function(response)){
-          res.render('mysaved.ejs', {movie: response})
+          res.render('mysaved.ejs', {data: response})
         };
       }
       else{

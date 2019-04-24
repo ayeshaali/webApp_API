@@ -28,10 +28,5 @@ app.use(require('./controllers/data'));
 
 //first request, renders index
 app.get('/', function(request, response){
-  var user_data={};
-  userName = "";
-  userPSWD = "";
-  response.status(200);
-  response.setHeader('Content-Type', 'text/html')
-  response.render('index', {page:request.url, user:user_data, title:"Index"});
+  response.render('index', {page:request.url, title:"Index"});
 });
