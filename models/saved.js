@@ -1,5 +1,6 @@
 var GoogleSpreadsheet = require('google-spreadsheet');
 var creds = require(__dirname+'/client_secret.json');
+var doc = new GoogleSpreadsheet('1VhmFEUdPN_pYj15K92yZbFGG-pZgVL7xrGrN2zB_R2o');
 
 //need to add a saved google sheet
 
@@ -31,5 +32,4 @@ exports.getSave = function(filename, callback){
     }
   });
   return saveArray;
-
 }

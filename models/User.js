@@ -1,5 +1,9 @@
 var fs = require("fs");
 var dataJS = require(__dirname +'/googlesheets');
+var GoogleSpreadsheet = require('google-spreadsheet');
+var creds = require(__dirname+'/client_secret.json');
+var doc = new GoogleSpreadsheet('1VhmFEUdPN_pYj15K92yZbFGG-pZgVL7xrGrN2zB_R2o');
+
 
 //gets a user
 exports.getUser = function(user_id, callback) {
@@ -24,7 +28,7 @@ exports.createUser = function(name, pswd, callback) {
         result= false;
         feedbackN = 42;
     }
-    
+
     var user_key = makeid(10);
     dataJS.getAllKeys(function(keys){
       while (keys.includes(user_key)){
@@ -88,4 +92,3 @@ var createBlankUser= function(){
   };
   return user;
 }
-
