@@ -8,7 +8,7 @@ var favicon = require('serve-favicon');
 var app = express();
 var Users = require(__dirname +'/models/User');
 var Routes = require(__dirname +'/controllers/user');
-var Info = require(__dirname + '/models/jobprogram.js');
+var Saved = require(__dirname + '/models/saved.js');
 var methodOverride = require('method-override');
 app.use(methodOverride('_method'));
 
