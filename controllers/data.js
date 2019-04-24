@@ -1,7 +1,7 @@
 var express = require('express');
 var fs = require("fs");
 var router = express.Router();
-var apikey = 'f09c17eb';
+var apikey = 'ByGdy25LMh';
 var Saved = require('../models/saved');
 
 
@@ -19,7 +19,7 @@ router.get('/mysaved', function(request, response) {
 })
 
 router.post("/jobs", function(req,res){
-  request("APIintheSky.herokuapp.com/jobsearch?apikey="+apikey+"&agency="+req.query.agency+"&title="+req.query.title+"&category="+req.query.category+"&service="+req.query.service+"&location="+req.query.location, function(err, response, body) {
+  request("apiinthesky.herokuapp.com/jobsearch?apikey="+apikey+"&agency="+req.query.agency+"&title="+req.query.title+"&category="+req.query.category+"&service="+req.query.service+"&location="+req.query.location, function(err, response, body) {
       if(!err){
         var data = JSON.parse(body);
         Saved.savedInfo(data,"benefits", function(response)){
