@@ -8,6 +8,7 @@ var favicon = require('serve-favicon');
 var app = express();
 var Users = require(__dirname +'/models/User');
 var Routes = require(__dirname +'/controllers/user');
+var DataRoutes = require(__dirname +'/controllers/data');
 var Saved = require(__dirname + '/models/saved.js');
 var methodOverride = require('method-override');
 app.use(methodOverride('_method'));
@@ -23,8 +24,9 @@ app.listen(port, function(){
   console.log('Server started at '+ new Date()+', on port ' + port+'!');
 });
 
-app.use(require('./controllers/user'));
+
 app.use(require('./controllers/data'));
+app.use(require('./controllers/user'));
 
 //first request, renders index
 app.get('/', function(request, response){

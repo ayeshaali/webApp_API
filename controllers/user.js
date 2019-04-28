@@ -2,6 +2,34 @@ var express = require('express');
 var fs = require("fs");
 var router = express.Router();
 var Users = require('../models/User');
+var userName;
+var userPSWD;
+
+router.get('/login', function(req, res){
+  console.log("GET REQUEST /login at"+ new Date());
+  
+  var user_data={
+    name: request.query.player_name,
+    pswd: request.query.pswd
+  };
+  
+  userName = user_data["name"];
+  userPSWD = user_data["pswd"];
+  Users.getUser(userName, function(user_data){
+    response.status(200);
+    response.setHeader('Content-Type', 'text/html')
+    if (user_data["name"] == "") {//if someone accidentally submits login w/o entering anything
+      response.render('index');
+    } else if (user_data.pswd == userPSWD) {
+      response.render('search', {user:user_data});
+    } else {
+      user_data["failure"] = 4;
+      userName = "";
+      userPSWD = "";
+      response.render('index');
+    }
+  });
+});
 
 //create account button-- renders user_details
 router.get('/user/new', function(req, res){

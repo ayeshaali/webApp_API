@@ -8,10 +8,10 @@ var Saved = require('../models/saved');
 router.get('/search', function(request, response) {
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
-    response.render('search');
+    response.render('search', );
 })
 
-router.get('/mysaved', function(request, response) {
+router.get('/mysaved/:id', function(request, response) {
     var arr = Saved.getSave();
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
@@ -22,9 +22,9 @@ router.post("/jobs", function(req,res){
   request("apiinthesky.herokuapp.com/jobsearch?apikey="+apikey+"&agency="+req.query.agency+"&title="+req.query.title+"&category="+req.query.category+"&service="+req.query.service+"&location="+req.query.location, function(err, response, body) {
       if(!err){
         var data = JSON.parse(body);
-        Saved.savedInfo(data,"benefits", function(response)){
+        Saved.savedInfo(data,"benefits", function(response){
           res.render('mysaved.ejs', {data: response})
-        };
+        });
       }
       else{
         res.redirect('/search');
@@ -37,9 +37,9 @@ router.post("/benefits", function(request,response){
   request("APIintheSky.herokuapp.com/benefitsearch?apikey="+apikey+"&name="+req.query.name+"&type="+req.query.type+"&pop="+req.query.pop+"&contact="+req.query.contact+"&desc="+req.query.desc, function(err, response, body) {
       if(!err){
         var data = JSON.parse(body);
-        Saved.savedInfo(data,"benefits", function(response)){
+        Saved.savedInfo(data,"benefits", function(response){
           res.render('mysaved.ejs', {data: response})
-        };
+        });
       }
       else{
         res.redirect('/search');
@@ -63,3 +63,5 @@ router.delete('/jobs/:id', function (req, res) {
     res.render('mysaved');
   });
 })
+
+module.exports = router;
