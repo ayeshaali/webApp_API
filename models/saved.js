@@ -5,23 +5,42 @@ var doc = new GoogleSpreadsheet('1VhmFEUdPN_pYj15K92yZbFGG-pZgVL7xrGrN2zB_R2o');
 //need to add a saved google sheet
 
 
-exports.saveInfo = function(json, filename, callback){
+exports.saveInfo = function(id, user_id, password, filename, callback){
   var information;
-  var string = JSON.parse(json);
-  if(filename == 1){
-    dataJS.createRow(this.json, 1, function(){
-      callback(true,feedback);
+  var string;
+  var c = [user_id, password];
+  //var string = JSON.parse(json);
+    dataJS.loadGoogle(filename, function(){
+      doc.getRows(filename,function(err,rows){
+        for(var i = 0; i<rows.length; i++){
+          if(rows.id == this.id){
+            c.push(rows);
+            break;
+          }
+        }
+      });
+
+      doc.updateRow(3, user_id, c, function(){
+        console.log("Updated")
+      });
     });
-    information = [string.agency, string.business_title, string.job_category, string.part_or_full, string.location];
+    /*
+    information = {Agency: string.agency, business_title: string.business_title, job_category: string.job_category, Part_or_Full: string.part_or_full, Location: string.location};
+    string = JSON.stringify(information);
+    array = [user_id, password, information];
+
   }
   else{
-    dataJS.createRow(this.json, 2, function(){
-      callback(true,feedback);
-    });
-    information = [string.program_name, string.benefit_type, string.population_served, string.contact_info, string.summary];
+    information = {Program_Name: string.program_name, benefit_type: string.benefit_type, population_served: string.population_served, Contact_Info: string.contact_info, string.summary};
+    string = JSON.stringify(information);
+    array = [user_id, password, information];
   }
-  return information;
+  */
+  //return information;
 }
+
+
+
 
 
 exports.getSave = function(filename, callback){
