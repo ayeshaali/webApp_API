@@ -5,7 +5,7 @@ var Users = require('../models/User');
 var userName;
 var userPSWD;
 
-router.get('/login', function(req, res){
+router.get('/login', function(request, response){
   console.log("GET REQUEST /login at"+ new Date());
   
   var user_data={
