@@ -39,9 +39,10 @@ router.get('/benefitsearch', function(request, response) {
       else{
         res.redirect('/searchpage');
       }
-    });//look for the movie
+    });
 })
 
+//save one job
 router.post("/jobs/:user_id/:id", function(req,res){
   request("apiinthesky.herokuapp.com/jobsearch?apikey="+apikey+"&agency="+req.query.agency+"&title="+req.query.title+"&category="+req.query.category+"&service="+req.query.service+"&location="+req.query.location, function(err, response, body) {
       if(!err){
@@ -53,9 +54,10 @@ router.post("/jobs/:user_id/:id", function(req,res){
       else{
         res.redirect('/search');
       }
-    });//look for the movie
+    });
 })
 
+//save one benefit
 router.post("/benefits/:user_id/:id", function(request,response){
   request("APIintheSky.herokuapp.com/benefitsearch?apikey="+apikey+"&name="+req.query.name+"&type="+req.query.type+"&pop="+req.query.pop+"&contact="+req.query.contact+"&desc="+req.query.desc, function(err, response, body) {
       if(!err){
@@ -68,9 +70,10 @@ router.post("/benefits/:user_id/:id", function(request,response){
         res.redirect('/search');
       }
 
-    });//look for the movie
+    });
 })
 
+//delete one job
 router.delete('/jobs/:id', function (req, res) {
   Jobs.deleteUser(req.params.id, function(){
     res.status(200);
@@ -79,6 +82,7 @@ router.delete('/jobs/:id', function (req, res) {
   });
 })
 
+//delete one benefit
 router.delete('/jobs/:id', function (req, res) {
   Jobs.deleteUser(req.params.id, function(){
     res.status(200);
@@ -87,6 +91,7 @@ router.delete('/jobs/:id', function (req, res) {
   });
 })
 
+//get all the saved stuff for the user
 router.get('/mysaved/:id', function(request, response) {
     var arr = Saved.getSave();
     response.status(200);
