@@ -9,18 +9,19 @@ router.get('/login', function(request, response){
   console.log("GET REQUEST /login at"+ new Date());
   
   var user_data={
-    name: request.query.player_name,
+    name: request.query.name,
     pswd: request.query.pswd
   };
   
   userName = user_data["name"];
   userPSWD = user_data["pswd"];
   Users.getUser(userName, function(user_data){
+    console.log(user_data)
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
     if (user_data["name"] == "") {//if someone accidentally submits login w/o entering anything
       response.render('index');
-    } else if (user_data.pswd == userPSWD) {
+    } else if (user_data.password == userPSWD) {
       response.render('search', {user:user_data});
     } else {
       user_data["failure"] = 4;

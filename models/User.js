@@ -9,8 +9,10 @@ var doc = new GoogleSpreadsheet('1VhmFEUdPN_pYj15K92yZbFGG-pZgVL7xrGrN2zB_R2o');
 exports.getUser = function(user_id, callback) {
   var user = createBlankUser();
   var all_users = dataJS.loadGoogle(3, function(all_users) {
+    console.log(all_users)
     for(var i=0; i<all_users.length; i++){
-      if(all_users[i].name==user_id.trim()){
+      if(all_users[i].username==user_id.trim()){
+        console.log("yes")
         user = all_users[i];
         break;
       }
