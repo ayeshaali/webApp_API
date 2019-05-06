@@ -48,7 +48,7 @@ router.get('/user/new', function(req, res){
 router.post('/users',function(req,res){
   console.log('POST Request- /Users'+" at "+ new Date());
   var u = {
-    name: req.body.user_name,
+    name: req.body.name,
     pswd: req.body.pswd
   }
   
