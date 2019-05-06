@@ -9,8 +9,10 @@ var doc = new GoogleSpreadsheet('1VhmFEUdPN_pYj15K92yZbFGG-pZgVL7xrGrN2zB_R2o');
 exports.getUser = function(user_id, callback) {
   var user = createBlankUser();
   var all_users = dataJS.loadGoogle(3, function(all_users) {
+    console.log(all_users)
     for(var i=0; i<all_users.length; i++){
-      if(all_users[i].name==user_id.trim()){
+      if(all_users[i].username==user_id){
+        console.log("yes")
         user = all_users[i];
         break;
       }
@@ -24,6 +26,7 @@ exports.getUser = function(user_id, callback) {
 exports.createUser = function(name, pswd, callback) {
     var result = true;
     var feedbackN = 0;
+    console.log(name+" "+pswd)
     if (name==null||name==""||pswd==null||pswd==""){
         result= false;
         feedbackN = 42;
@@ -35,20 +38,20 @@ exports.createUser = function(name, pswd, callback) {
         user_key = makeid(10);
       }
 
-      exports.getUser(user_id, function(user){
+      exports.getUser(name, function(user){
         if (user.name != "notarealuser") {
           result = false;
           feedbackN = 10;
         }
 
         if (result) {
-          date=returnDate();
           var new_obj = {
             "name": name,
             "pswd": pswd,
-            "key": user_key
+            "SavedJob": [],
+            "SavedBenefit":[]
           }
-          dataJS.createRow(new_obj, 3, function(){
+          dataJS.createRow(new_obj, 2, function(){
             callback(true, feedbackN);
           })
         } else {
