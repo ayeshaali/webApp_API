@@ -4,7 +4,6 @@ var GoogleSpreadsheet = require('google-spreadsheet');
 var creds = require(__dirname+'/client_secret.json');
 var doc = new GoogleSpreadsheet('1VhmFEUdPN_pYj15K92yZbFGG-pZgVL7xrGrN2zB_R2o');
 
-
 //gets a user
 exports.getUser = function(user_id, callback) {
   var user = createBlankUser();
@@ -46,12 +45,13 @@ exports.createUser = function(name, pswd, callback) {
 
         if (result) {
           var new_obj = {
-            "name": name,
-            "pswd": pswd,
-            "SavedJob": [],
-            "SavedBenefit":[]
+            "Username": name.trim(),
+            "Password": pswd.trim(),
+            "SavedJob": "hello",
+            "SavedBenefit":"hello"
           }
-          dataJS.createRow(new_obj, 2, function(){
+          console.log(new_obj)
+          dataJS.createRow(new_obj, 3, function(){
             callback(true, feedbackN);
           })
         } else {

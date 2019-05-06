@@ -1,10 +1,6 @@
 var GoogleSpreadsheet = require('google-spreadsheet');
 var creds = require(__dirname+'/client_secret.json');
 var doc =  new GoogleSpreadsheet('1VhmFEUdPN_pYj15K92yZbFGG-pZgVL7xrGrN2zB_R2o');
-//var dataJS = require(__dirname +'/data');
-// Create a document object using the ID of the spreadsheet - obtained from its URL.
-//var doc = new GoogleSpreadsheet('1enTW9mljF4F36yvGNlx6Vzf6zdT30xMIs6eDiGh8JJ4');
-// Authenticate with the Google Spreadsheets API.
 
 exports.loadGoogle = function(filename, callback) {
   var user_data = [];
@@ -48,6 +44,7 @@ exports.createRow = function(obj, filenumber, callback) {
   var sheet;
   doc.useServiceAccountAuth(creds, function (err) {
     doc.addRow(filenumber, obj, function(){
+      console.log("after writing"+obj)
       callback();
     });
   });
