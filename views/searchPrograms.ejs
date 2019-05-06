@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>API - MySaved</title>
+  <title>API - Search</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="../styles/style.css">
  </head>
 
 <body>
-  <h1>Your Saved Info</h1>
   <ul class="nav justify-content-center">
     <li class="nav-item">
       <a class="nav-link active" href="/index" id="create">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/mysaved" id="create">MySaved</a>
     </li>
     <li class="nav-item">
       <a class="nav-link active" href="/user_details" id="create">User Details</a>
@@ -18,24 +20,16 @@
     <li class="nav-item">
       <a class="nav-link active" href="/searchJobs" id="create">Search Jobs</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link active" href="/searchPrograms" id="create">Search Programs</a>
-    </li>
   </ul>
 
-  <h3>Your Saved Jobs:</h3>
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Title</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Part/full time</h6>
-      <h6 class="card-subtitle mb-2 text-muted">Agency</h6>
-      <h6 class="card-subtitle mb-2 text-muted">Category</h6>
-      <h6 class="card-subtitle mb-2 text-muted">Location</h6>
-      <a href="#" class="card-link">Save This Opportunity</a>
-    </div>
-  </div>
+  <form>
+    <div class="form-group">
+      <label for="advancedProgramSearch">Advanced Program Search</label>
+      <input type="text" id="p_key" name="program_keyword_input">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 
-  <h3>Your Saved Programs:</h3>
+  <h3>Browse Programs Below:</h3>
   <div class="card" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title">Program Name</h5>

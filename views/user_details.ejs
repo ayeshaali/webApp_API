@@ -7,6 +7,21 @@
  </head>
 
 <body>
+  <ul class="nav justify-content-center">
+    <li class="nav-item">
+      <a class="nav-link active" href="/index" id="create">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/mysaved" id="create">MySaved</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/searchJobs" id="create">Search Jobs</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/searchPrograms" id="create">Search Programs</a>
+    </li>
+  </ul>
+
   <div id="feedback" class = "<%if (user==null || feedback["failure"]==10 || feedback["failure"]==42){%> negative <%}%>">
     <%if (feedback["failure"]==10){%>That username is taken. Please choose a different one.<%} else if (feedback["failure"]==42){%> You did not enter valid text for one or more of the fields. <%} else if (user==null) {%>Please enter your information to create an account <%}%>
   </div>
