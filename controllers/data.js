@@ -5,10 +5,16 @@ var apikey = 'ByGdy25LMh';
 var Saved = require('../models/saved');
 
 //go to search page
-router.get('/searchpage', function(request, response) {
+router.get('/searchPrograms', function(request, response) {
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
-    response.render('search');
+    response.render('searchPrograms');
+})
+
+router.get('/searchJobs', function(request, response) {
+    response.status(200);
+    response.setHeader('Content-Type', 'text/html')
+    response.render('searchJobs');
 })
 
 //search based on params (job)
