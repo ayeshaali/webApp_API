@@ -21,7 +21,7 @@ router.get('/login', function(request, response){
     if (user_data.username == "") {//if someone accidentally submits login w/o entering anything
       response.render('index');
     } else if (user_data.password == userPSWD) {
-      response.render('mysaved', {user:user_data["username"]});
+      response.render('mysaved', {user:user_data});
     } else {
       user_data["failure"] = 4;
       userName = "";
