@@ -30,5 +30,5 @@ app.use(require('./controllers/user'));
 
 //first request, renders index
 app.get('/', function(request, response){
-  response.render('index', {page:request.url, title:"Index"});
+  response.render('index', {page:request.url, title:"Index", user:""});
 });
