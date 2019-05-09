@@ -12,13 +12,13 @@
       <a class="nav-link active" href="/" id="create">Home</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" href="/searchJobs" id="create">Search Jobs</a>
+      <a class="nav-link active" href="/searchJobs/<%=user%>" id="create">Search Jobs</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" href="/searchPrograms" id="create">Search Programs</a>
+      <a class="nav-link active" href="/searchPrograms/<%=user%>" id="create">Search Programs</a>
     </li>
     <li class="nav-item">
-      <a class= <% if(user==null){ %>"nav-link disabled"<% } %> <% else{ %>"nav-link active"<% } %> href="/mysaved" id="create">MySaved</a>
+      <a class= <% if(user==null){ %>"nav-link disabled"<% } %> <% else{ %>"nav-link active"<% } %> href="/mysaved/<%=user%>" id="create">MySaved</a>
     </li>
     <% if(user!=null){ %>
       <div class="alert alert-warning" role="alert">Log In to Access Your Saved Info</div>
