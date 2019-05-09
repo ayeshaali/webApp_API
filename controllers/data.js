@@ -61,6 +61,33 @@ router.get('/benefitsearch/:user_id', function(req, res) {
     });
 })
 
+router.get('/jobsearch', function(req, res) {
+  request("apiinthesky.herokuapp.com/jobsearch?apikey="+apikey+"&agency="+req.query.agency+"&title="+req.query.title+"&category="+req.query.category+"&service="+req.query.service+"&location="+req.query.location, function(err, response, body) {
+      if(!err){
+        var data = JSON.parse(body);
+        var u;
+        res.render('searchJobs', {user:u, data: data})
+      }
+      else{
+        res.redirect('/searchJobs');
+      }
+    });
+})
+
+//search based on params (benefit)
+router.get('/benefitsearch', function(req, res) {
+  request("APIintheSky.herokuapp.com/benefitsearch?apikey="+apikey+"&name="+req.query.name+"&type="+req.query.type+"&pop="+req.query.pop+"&contact="+req.query.contact+"&desc="+req.query.desc, function(err, response, body) {
+      if(!err){
+        var data = JSON.parse(body);
+        var u;
+        res.render('searchPrograms', {user:u, data: data})
+      }
+      else{
+        res.redirect('/searchPrograms');
+      }
+    });
+})
+
 //save one job
 router.post("/jobs/:user_id/:id", function(req,res){
   request("apiinthesky.herokuapp.com/onejob?apikey="+apikey+"&id="+req.params.id, function(err, response, body) {

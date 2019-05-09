@@ -22,10 +22,14 @@
     </li>
   </ul>
 
-  <form>
+  <form action= "/jobsearch<%if(user.username!=null){%>/<%=user.username%><%}%>" method="get">
     <div class="form-group">
-      <label for="advancedJobSearch">Advanced Job Search</label>
-      <input type="text" id="j_key" name="job_keyword_input">
+      <label for="advancedJobSearch">Advanced Job Search</label><br>
+      Agency: <input type="text" id="j_key" name="agency"> <br>
+      Business Title: <input type="text" id="j_key" name="title"> <br>
+      Category: <input type="text" id="j_key" name="category"><br>
+      Part or Full: <input type="text" id="j_key" name="service"><br>
+      Location: <input type="text" id="j_key" name="location"><br>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 
