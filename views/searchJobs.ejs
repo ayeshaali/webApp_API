@@ -9,16 +9,16 @@
 <body>
   <ul class="nav justify-content-center">
     <li class="nav-item">
-      <a class="nav-link active" href="/index" id="create">Home</a>
+      <a class="nav-link active" href="/" id="create">Home</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" href="/mysaved/<%=user%>" id="create">MySaved</a>
+      <a class= "<%if(user.username==null){%>nav-link disabled<%} else{ %>nav-link active<%}%>" href="/mysaved/<%=user.username%>" id="create">MySaved</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" href="/user_details/<%=user%>" id="create">User Details</a>
+      <a class="nav-link active" href="<%if(user.username==null){%>/user/new<%} else{ %>/user/<%=user.username%>/edit<%}%>" id="create"><%if(user.username==null){%>Create Account<%} else{ %>User Details<%}%></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" href="/searchPrograms/<%=user%>" id="create">Search Programs</a>
+      <a class="nav-link active" href="/searchPrograms<%if(user.username!=null){%>/<%=user.username%><%}%>" id="create">Search Programs</a>
     </li>
   </ul>
 

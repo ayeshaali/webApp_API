@@ -12,15 +12,15 @@
       <a class="nav-link active" href="/" id="create">Home</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" href="/searchJobs/<%=user%>" id="create">Search Jobs</a>
+      <a class="nav-link active" href="/searchJobs<%if(user==null){} else {%>/<%=user.username%><%}%>" id="create">Search Programs</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" href="/searchPrograms/<%=user%>" id="create">Search Programs</a>
+      <a class="nav-link active" href="/searchPrograms<%if(user==null){} else {%>/<%=user.username%><%}%>" id="create">Search Programs</a>
     </li>
     <li class="nav-item">
-      <a class= <% if(user==null){ %>"nav-link disabled"<% } %> <% else{ %>"nav-link active"<% } %> href="/mysaved/<%=user%>" id="create">MySaved</a>
+      <a class= "<%if(user==null){%>nav-link disabled<%} else{ %>nav-link active<%}%>" href="/mysaved<%if(user==null){} else {%>/<%=user.username%><%}%>" id="create">MySaved</a>
     </li>
-    <% if(user!=null){ %>
+    <% if(user==null){ %>
       <div class="alert alert-warning" role="alert">Log In to Access Your Saved Info</div>
     <%}%>
   </ul>
@@ -30,8 +30,8 @@
   </div>
   <div id="enter_name">
     <form action="<%if(user==null){%>/users<%}else{%>/user/<%=user.name%>?_method=PUT<%}%>" method="post">
-      Username: <input type="text" id="enter_username" name="name" value = "<%if (user!=null){%><%=user.name%><%} else {%><%}%>"><br>
-      PSWD: <input type="text" id="enter_psw" name="pswd" value = "<%if (user!=null){%><%=user.pswd%><%}%>"><br>
+      Username: <input type="text" id="enter_username" name="name" value = "<%if (user!=null){%><%=user.username%><%} else {%><%}%>"><br>
+      PSWD: <input type="text" id="enter_psw" name="pswd" value = "<%if (user!=null){%><%=user.password%><%}%>"><br>
       <br>
       <button type="submit" id = "enter_name_button"><%if(user==null){%>Create Account<%}else{%>Modify Account<%}%></button>
     </form>

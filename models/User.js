@@ -30,38 +30,29 @@ exports.createUser = function(name, pswd, callback) {
         result= false;
         feedbackN = 42;
     }
-
-    var user_key = makeid(10);
-    dataJS.getAllKeys(function(keys){
-      while (keys.includes(user_key)){
-        user_key = makeid(10);
+    exports.getUser(name, function(user){
+      if (user.name != "notarealuser") {
+        result = false;
+        feedbackN = 10;
       }
 
-      exports.getUser(name, function(user){
-        if (user.name != "notarealuser") {
-          result = false;
-          feedbackN = 10;
+      if (result) {
+        var new_obj = {
+          "Username": name.trim(),
+          "Password": pswd.trim(),
+          "SavedJob": "",
+          "SavedBenefit":""
         }
-
-        if (result) {
-          var new_obj = {
-            "Username": name.trim(),
-            "Password": pswd.trim(),
-            "SavedJob": "hello",
-            "SavedBenefit":"hello"
-          }
-          console.log(new_obj)
-          dataJS.createRow(new_obj, 3, function(){
-            callback(true, feedbackN);
-          })
-        } else {
+        console.log(new_obj)
+        dataJS.createRow(new_obj, 3, function(){
+          callback(true, feedbackN);
+        })
+      } else {
           callback(false, feedbackN);
-        }
-      })
-
-    })
-
+      }
+  })
 }
+
 
 //deletes a user
 exports.deleteUser = function(user_id, callback) {
@@ -74,15 +65,6 @@ exports.updateUser = function(user_id, updates, callback) {
     console.log("doing next");
     callback();
   });
-}
-
-function makeid(length) {
-  var text = "";
-  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  for (var i = 0; i < length; i++)
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-  return text;
 }
 
 var createBlankUser= function(){

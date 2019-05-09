@@ -16,13 +16,12 @@ router.get('/login', function(request, response){
   userName = user_data["name"];
   userPSWD = user_data["pswd"];
   Users.getUser(userName, function(user_data){
-    console.log(user_data)
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
-    if (user_data["name"] == "") {//if someone accidentally submits login w/o entering anything
+    if (user_data.username == "") {//if someone accidentally submits login w/o entering anything
       response.render('index');
     } else if (user_data.password == userPSWD) {
-      response.render('search', {user:user_data});
+      response.render('mysaved', {user:user_data["username"]});
     } else {
       user_data["failure"] = 4;
       userName = "";
