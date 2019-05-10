@@ -125,9 +125,9 @@ router.get('/jobsearch', function(req, res) {
   request("http://localhost:3000/jobsearch?apikey="+apikey+"&agency="+req.query.agency+"&title="+req.query.title+"&category="+req.query.category+"&service="+req.query.service+"&location="+req.query.location, function(err, response, body) {
       if(!err){
         var data = JSON.parse(body);
+        console.log(data);
         var u;
-        res.render(data)
-        // res.render('searchJobs', {user:u, data: data})
+        res.render('/searchJobs', {data:data})
       }
       else{
         console.error('error:'+err);
@@ -137,7 +137,7 @@ router.get('/jobsearch', function(req, res) {
 })
 //search based on params (benefit)
 router.get('/benefitsearch', function(req, res) {
-  request("http://www.apisky.herokuapp.com/benefitsearch?apikey="+apikey+"&name="+req.query.name+"&type="+req.query.type+"&pop="+req.query.pop+"&contact="+req.query.contact+"&desc="+req.query.desc, function(err, response, body) {
+  request("http://localhost:3000/benefitsearch?apikey="+apikey+"&name="+req.query.name+"&type="+req.query.type+"&pop="+req.query.pop+"&contact="+req.query.contact+"&desc="+req.query.desc, function(err, response, body) {
       if(!err){
         var data = JSON.parse(body);
         var u;
