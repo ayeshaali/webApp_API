@@ -142,7 +142,9 @@ router.get('/benefitsearch', function(req, res) {
   request("http://localhost:3000/benefitsearch?apikey="+apikey+"&name="+req.query.name+"&type="+req.query.type+"&pop="+req.query.pop+"&contact="+req.query.contact+"&desc="+req.query.desc, function(err, response, body) {
       if(!err){
         var data = JSON.parse(body);
-        var u;
+        var u = {
+          username: null
+        };
         res.render('searchPrograms', {user:u, data: data})
       }
       else{
