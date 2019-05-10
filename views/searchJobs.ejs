@@ -46,10 +46,10 @@
   <% if (data!=null) { for(var i=0; i < data.length; i++){ %>
   <div class="card" style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title"><%=data[i].title %></h5>
+      <h5 class="card-title"><%=data[i].business_title %></h5>
       <h6 class="card-subtitle mb-2 text-muted"><%=data[i].part_or_full %></h6>
       <h6 class="card-subtitle mb-2 text-muted"><%=data[i].agency %></h6>
-      <h6 class="card-subtitle mb-2 text-muted"><%=data[i].category %></h6>
+      <h6 class="card-subtitle mb-2 text-muted"><%=data[i].job_category %></h6>
       <h6 class="card-subtitle mb-2 text-muted"><%=data[i].location %></h6>
       <% if (user.username!=null) {%><a href="#" class="card-link">Save This Opportunity</a><%}%>
     </div>
