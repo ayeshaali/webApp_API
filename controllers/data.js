@@ -1,6 +1,7 @@
 var express = require('express');
 var fs = require("fs");
 var router = express.Router();
+var request = require('request');
 var apikey = 'ByGdy25LMh';
 var Saved = require('../models/saved');
 
@@ -27,19 +28,20 @@ router.get('/searchJobs/:user_id', function(request, response) {
 })
 //search based on params (job)
 router.get('/jobsearch/:user_id', function(req, res) {
-  request("apiinthesky.herokuapp.com/jobsearch?apikey="+apikey+"&agency="+req.query.agency+"&title="+req.query.title+"&category="+req.query.category+"&service="+req.query.service+"&location="+req.query.location, function(err, response, body) {
+  request("http://www.apisky.herokuapp.com/jobsearch?apikey="+apikey+"&agency="+req.query.agency+"&title="+req.query.title+"&category="+req.query.category+"&service="+req.query.service+"&location="+req.query.location, function(err, response, body) {
       if(!err){
         var data = JSON.parse(body);
         res.render('searchJobs', {user:req.params.user_id,data: data})
       }
       else{
+        console.error('error:', error);
         res.redirect('/searchJobs/'+req.params.user_id);
       }
     });
 })
 //search based on params (benefit)
 router.get('/benefitsearch/:user_id', function(req, res) {
-  request("APIintheSky.herokuapp.com/benefitsearch?apikey="+apikey+"&name="+req.query.name+"&type="+req.query.type+"&pop="+req.query.pop+"&contact="+req.query.contact+"&desc="+req.query.desc, function(err, response, body) {
+  request("http://www.apisky.herokuapp.com/benefitsearch?apikey="+apikey+"&name="+req.query.name+"&type="+req.query.type+"&pop="+req.query.pop+"&contact="+req.query.contact+"&desc="+req.query.desc, function(err, response, body) {
       if(!err){
         var data = JSON.parse(body);
         res.render('searchPrograms', {user:req.params.user_id, data: data})
@@ -120,20 +122,22 @@ router.get('/searchJobs', function(request, response) {
 })
 //search based on params (job)
 router.get('/jobsearch', function(req, res) {
-  request("apiinthesky.herokuapp.com/jobsearch?apikey="+apikey+"&agency="+req.query.agency+"&title="+req.query.title+"&category="+req.query.category+"&service="+req.query.service+"&location="+req.query.location, function(err, response, body) {
+  request("http://localhost:3000/jobsearch?apikey="+apikey+"&agency="+req.query.agency+"&title="+req.query.title+"&category="+req.query.category+"&service="+req.query.service+"&location="+req.query.location, function(err, response, body) {
       if(!err){
         var data = JSON.parse(body);
         var u;
-        res.render('searchJobs', {user:u, data: data})
+        res.render(data)
+        // res.render('searchJobs', {user:u, data: data})
       }
       else{
+        console.error('error:'+err);
         res.redirect('/searchJobs');
       }
     });
 })
 //search based on params (benefit)
 router.get('/benefitsearch', function(req, res) {
-  request("APIintheSky.herokuapp.com/benefitsearch?apikey="+apikey+"&name="+req.query.name+"&type="+req.query.type+"&pop="+req.query.pop+"&contact="+req.query.contact+"&desc="+req.query.desc, function(err, response, body) {
+  request("http://www.apisky.herokuapp.com/benefitsearch?apikey="+apikey+"&name="+req.query.name+"&type="+req.query.type+"&pop="+req.query.pop+"&contact="+req.query.contact+"&desc="+req.query.desc, function(err, response, body) {
       if(!err){
         var data = JSON.parse(body);
         var u;

@@ -6,13 +6,7 @@ var Users = require(__dirname +'/User');
 var dataJS = require(__dirname +'/googlesheets');
 //need to add a saved google sheet
 
-
-
-
-
-
-
-exports.saveInfo = function(user_id, jsonObj, type, callback){
+exports.saveInfo = function(user_id, jsonObj, type, callback) {
   var information;
   var string;
   Users.getUser(user_id, function(k){
@@ -65,7 +59,6 @@ exports.saveInfo = function(user_id, jsonObj, type, callback){
   }
   */
   //return information;
-}
 
 
 
