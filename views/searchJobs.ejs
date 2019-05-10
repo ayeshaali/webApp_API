@@ -43,16 +43,18 @@
   </form>
 
   <h3>Browse Jobs Below:</h3>
+  <% for(int i=0; i < data.length(); i++){ %>
   <div class="card" style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title">Title</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Part/full time</h6>
-      <h6 class="card-subtitle mb-2 text-muted">Agency</h6>
-      <h6 class="card-subtitle mb-2 text-muted">Category</h6>
-      <h6 class="card-subtitle mb-2 text-muted">Location</h6>
+      <h5 class="card-title"><% data[i].title %></h5>
+      <h6 class="card-subtitle mb-2 text-muted"><% data[i].time %></h6>
+      <h6 class="card-subtitle mb-2 text-muted"><% data[i].agency %></h6>
+      <h6 class="card-subtitle mb-2 text-muted"><% data[i].category %></h6>
+      <h6 class="card-subtitle mb-2 text-muted"><% data[i].location %></h6>
       <a href="#" class="card-link">Save This Opportunity</a>
     </div>
   </div>
+  <% } %>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
