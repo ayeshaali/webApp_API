@@ -26,10 +26,18 @@
   <h3>Advanced Job Search:</h3>
   <form action= "/jobsearch<%if(user.username!=null){%>/<%=user.username%><%}%>" method="get">
     <div class="form-group">
+      <h3>I am interested in...</h3>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            Part Time Jobs<input type="checkbox" aria-label="partTime">
+            Full Time Jobs<input type="checkbox" aria-label="FullTime">
+          </div>
+        </div>
+      </div>
       Agency: <input type="text" id="j_key" name="agency"> <br>
       Business Title: <input type="text" id="j_key" name="title"> <br>
       Category: <input type="text" id="j_key" name="category"><br>
-      Part or Full: <input type="text" id="j_key" name="service"><br>
       Location: <input type="text" id="j_key" name="location"><br>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
