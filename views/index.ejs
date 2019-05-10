@@ -21,6 +21,9 @@
     <li class="nav-item">
       <a class="nav-link active" href="/searchPrograms" id="create">Search Programs</a>
     </li>
+    <% if(user==null){ %>
+      <div class="alert alert-warning" role="alert">Log In to Access Your Saved Info</div>
+    <%}%>
   </ul>
   <form action="/login" method="get">
       Name:<input type="text" id="enter_name_input" name="name"><br>
