@@ -11,17 +11,19 @@ router.get('/searchPrograms/:user_id', function(request, response) {
       username: request.params.user_id
     }
     response.status(200);
+    var data;
     response.setHeader('Content-Type', 'text/html')
-    response.render('searchPrograms', {user:obj});
+    response.render('searchPrograms', {user:obj, data:data});
 })
 //go to search page
 router.get('/searchJobs/:user_id', function(request, response) {
     var obj = {
       username: request.params.user_id
     }
+      var data;
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
-    response.render('searchJobs', {user:obj});
+    response.render('searchJobs', {user:obj,data:data});
 })
 //search based on params (job)
 router.get('/jobsearch/:user_id', function(req, res) {
@@ -104,15 +106,17 @@ router.get('/mysaved/:user_id', function(req, res) {
 //*****WITHOUT LOGGING IN*******
 //go to page
 router.get('/searchPrograms', function(request, response) {
+  var data;
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
-    response.render('searchPrograms', {user:{}});
+    response.render('searchPrograms', {user:{}, data:data});
 })
 //go to page
 router.get('/searchJobs', function(request, response) {
+  var data;
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
-    response.render('searchJobs', {user:{}});
+    response.render('searchJobs', {user:{}, data:data});
 })
 //search based on params (job)
 router.get('/jobsearch', function(req, res) {
