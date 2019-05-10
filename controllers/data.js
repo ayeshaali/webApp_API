@@ -126,8 +126,10 @@ router.get('/jobsearch', function(req, res) {
       if(!err){
         var data = JSON.parse(body);
         console.log(data);
-        var u;
-        res.render('/searchJobs', {data:data})
+        var u = {
+          username: null
+        };
+        res.render('searchJobs', {user:u, data:data})
       }
       else{
         console.error('error:'+err);
