@@ -51,7 +51,7 @@
       <h6 class="card-subtitle mb-2 text-muted"><%=data[i].agency %></h6>
       <h6 class="card-subtitle mb-2 text-muted"><%=data[i].job_category %></h6>
       <h6 class="card-subtitle mb-2 text-muted"><%=data[i].location %></h6>
-      <% if (user.username!=null) {%><a href="#" class="card-link">Save This Opportunity</a><%}%>
+      <% if (user.username!=null) {%><a href="/jobs/<%=user.username%>/<%=data[i].ID%>" class="card-link">Save This Opportunity</a><%}%>
     </div>
   </div>
   <% } } %>

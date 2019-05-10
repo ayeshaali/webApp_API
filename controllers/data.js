@@ -28,20 +28,24 @@ router.get('/searchJobs/:user_id', function(request, response) {
 })
 //search based on params (job)
 router.get('/jobsearch/:user_id', function(req, res) {
-  request("http://www.apisky.herokuapp.com/jobsearch?apikey="+apikey+"&agency="+req.query.agency+"&title="+req.query.title+"&category="+req.query.category+"&service="+req.query.service+"&location="+req.query.location, function(err, response, body) {
+  request("http://localhost:3000/jobsearch?apikey="+apikey+"&agency="+req.query.agency+"&title="+req.query.title+"&category="+req.query.category+"&service="+req.query.service+"&location="+req.query.location, function(err, response, body) {
       if(!err){
         var data = JSON.parse(body);
-        res.render('searchJobs', {user:req.params.user_id,data: data})
+        console.log(data);
+        var u = {
+          username: req.params.user_id
+        };
+        res.render('searchJobs', {user:u, data:data})
       }
       else{
-        console.error('error:', error);
-        res.redirect('/searchJobs/'+req.params.user_id);
+        console.error('error:'+err);
+        res.redirect('/searchJobs');
       }
     });
 })
 //search based on params (benefit)
 router.get('/benefitsearch/:user_id', function(req, res) {
-  request("http://www.apisky.herokuapp.com/benefitsearch?apikey="+apikey+"&name="+req.query.name+"&type="+req.query.type+"&pop="+req.query.pop+"&contact="+req.query.contact+"&desc="+req.query.desc, function(err, response, body) {
+  request("http://localhost:3000/benefitsearch?apikey="+apikey+"&name="+req.query.name+"&type="+req.query.type+"&pop="+req.query.pop+"&contact="+req.query.contact+"&desc="+req.query.desc, function(err, response, body) {
       if(!err){
         var data = JSON.parse(body);
         res.render('searchPrograms', {user:req.params.user_id, data: data})
@@ -52,8 +56,8 @@ router.get('/benefitsearch/:user_id', function(req, res) {
     });
 })
 //save one job
-router.post("/jobs/:user_id/:id", function(req,res){
-  request("apiinthesky.herokuapp.com/onejob?apikey="+apikey+"&id="+req.params.id, function(err, response, body) {
+router.get("/jobs/:user_id/:id", function(req,res){
+  request("http://localhost:3000/onejob?apikey="+apikey+"&id="+req.params.id, function(err, response, body) {
       if(!err){
         var data= JSON.parse(body)
         Saved.saveInfo(req.params.user_id,data,"job", function(result){
@@ -66,8 +70,8 @@ router.post("/jobs/:user_id/:id", function(req,res){
     });
 })
 //save one benefit
-router.post("/benefits/:user_id/:id", function(req,res){
-  request("APIintheSky.herokuapp.com/onebenefit?apikey="+apikey+"&id="+req.params.id, function(err, response, body) {
+router.get("/benefits/:user_id/:id", function(req,res){
+  request("http://localhost:3000/onebenefit?apikey="+apikey+"&id="+req.params.id, function(err, response, body) {
       if(!err){
         var data = JSON.parse(body);
         Saved.saveInfo(req.params.user_id,data,"benefit", function(result){
