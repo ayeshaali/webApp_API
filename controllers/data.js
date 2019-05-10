@@ -11,17 +11,19 @@ router.get('/searchPrograms/:user_id', function(request, response) {
       username: request.params.user_id
     }
     response.status(200);
+    var data;
     response.setHeader('Content-Type', 'text/html')
-    response.render('searchPrograms', {user:obj});
+    response.render('searchPrograms', {user:obj, data:data});
 })
 //go to search page
 router.get('/searchJobs/:user_id', function(request, response) {
     var obj = {
       username: request.params.user_id
     }
+      var data;
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
-    response.render('searchJobs', {user:obj});
+    response.render('searchJobs', {user:obj,data:data});
 })
 //search based on params (job)
 router.get('/jobsearch/:user_id', function(req, res) {
@@ -52,7 +54,7 @@ router.post("/jobs/:user_id/:id", function(req,res){
   request("apiinthesky.herokuapp.com/onejob?apikey="+apikey+"&id="+req.params.id, function(err, response, body) {
       if(!err){
         var data= JSON.parse(body)
-        Saved.saveInfo(req.params.user_id,data,1, function(result){
+        Saved.saveInfo(req.params.user_id,data,"job", function(result){
           res.render('mysaved', {data: result})
         });
       }
@@ -66,7 +68,7 @@ router.post("/benefits/:user_id/:id", function(req,res){
   request("APIintheSky.herokuapp.com/onebenefit?apikey="+apikey+"&id="+req.params.id, function(err, response, body) {
       if(!err){
         var data = JSON.parse(body);
-        Saved.saveInfo(req.params.user_id,data,2, function(result){
+        Saved.saveInfo(req.params.user_id,data,"benefit", function(result){
           res.render('mysaved', {data: result})
         });
       }
@@ -104,15 +106,17 @@ router.get('/mysaved/:user_id', function(req, res) {
 //*****WITHOUT LOGGING IN*******
 //go to page
 router.get('/searchPrograms', function(request, response) {
+  var data;
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
-    response.render('searchPrograms', {user:{}});
+    response.render('searchPrograms', {user:{}, data:data});
 })
 //go to page
 router.get('/searchJobs', function(request, response) {
+  var data;
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
-    response.render('searchJobs', {user:{}});
+    response.render('searchJobs', {user:{}, data:data});
 })
 //search based on params (job)
 router.get('/jobsearch', function(req, res) {
