@@ -7,6 +7,7 @@
  </head>
 
 <body>
+  <h1>Search Programs Database</h1>
   <ul class="nav justify-content-center">
     <li class="nav-item">
       <a class="nav-link active" href="/" id="create">Home</a>
@@ -22,9 +23,9 @@
     </li>
   </ul>
 
+  <h3>Advanced Program Search:</h3>
   <form action= "/benefitsearch<%if(user.username!=null){%>/<%=user.username%><%}%>" method="get">
     <div class="form-group">
-      <label for="advancedProgramSearch">Advanced Program Search</label><br>
       Name: <input type="text" id="p_key" name="name"><br>
       Type: <input type="text" id="p_key" name="type"><br>
       Population Served: <input type="text" id="p_key" name="pop"><br>
