@@ -52,7 +52,7 @@ router.post("/jobs/:user_id/:id", function(req,res){
   request("apiinthesky.herokuapp.com/onejob?apikey="+apikey+"&id="+req.params.id, function(err, response, body) {
       if(!err){
         var data= JSON.parse(body)
-        Saved.saveInfo(req.params.user_id,data,1, function(result){
+        Saved.saveInfo(req.params.user_id,data,"job", function(result){
           res.render('mysaved', {data: result})
         });
       }
@@ -66,7 +66,7 @@ router.post("/benefits/:user_id/:id", function(req,res){
   request("APIintheSky.herokuapp.com/onebenefit?apikey="+apikey+"&id="+req.params.id, function(err, response, body) {
       if(!err){
         var data = JSON.parse(body);
-        Saved.saveInfo(req.params.user_id,data,2, function(result){
+        Saved.saveInfo(req.params.user_id,data,"benefit", function(result){
           res.render('mysaved', {data: result})
         });
       }
