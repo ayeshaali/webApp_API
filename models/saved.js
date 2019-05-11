@@ -10,65 +10,76 @@ exports.saveInfo = function(user_id, jsonObj, type, callback) {
   var information;
   var string;
   Users.getUser(user_id, function(k){
-      if(type = 1){
-        var c = JSON.parse(k.SavedJob);
-        c.push(jsonObj);
-        var final = JSON.stringify(c);
+      var array;
+      if(type == 1){
+        console.log(k.savedjob)
+        var jobJson = k.savedjob
+        if (k.savedjob == null || k.savedjob == "null") {
+          jobJson = []
+          
+        } else {
+          jobJson = JSON.parse(k.savedjob);
+        }
+        jobJson.push(jsonObj[0]);
+        var final = JSON.stringify(jobJson);
+        var array = [user_id, k.password, final, "null"];
+        console.log(array);
       }
       else{
-        var c = JSON.parse(k.SavedBenefit);
-        c.push(jsonObj);
-        var final = JSON.stringify(c);
+        var jobJson = k.savedbenefit
+        if (k.savedbenefit == "null") {
+          jobJson = []
+        } else {
+          jobJson = JSON.parse(k.savedbenefit);
+        }
+        jobJson.push(jsonObj[0]);
+        var final = JSON.stringify(jobJson);
+        var array = [user_id, k.password, k.savedjob, final];
       }
-    var array = [user_id, k.password, final];
-      doc.updateRow(3, user_id, array, function(){
+    
+      dataJS.updateRow(2, user_id, array, function(){
         console.log("This has been updated");
-        callback(final);
+        getSave(user_id, callback);
       });
   });
 }
 
-
-
-
-  //var string = JSON.parse(json);
-  /*
-    dataJS.loadGoogle(filename, function(){
-      doc.getRows(filename,function(err,rows){
-        for(var i = 0; i<rows.length; i++){
-          if(rows.id == this.id){
-            c.push(rows);
-            break;
-          }
-        }
-      });
-    */
-
-
-
-    /*
-    information = {Agency: string.agency, business_title: string.business_title, job_category: string.job_category, Part_or_Full: string.part_or_full, Location: string.location};
-    string = JSON.stringify(information);
-    array = [user_id, password, information];
-
-  }
-  else{
-    information = {Program_Name: string.program_name, benefit_type: string.benefit_type, population_served: string.population_served, Contact_Info: string.contact_info, string.summary};
-    string = JSON.stringify(information);
-    array = [user_id, password, information];
-  }
-  */
-  //return information;
-
-
-
-
-
 exports.getSave = function(user_id, callback){
-  var saveArray = [];
   Users.getUser(user_id, function(k){
-    saveArray[0] = JSON.parse(k.SavedJob);
-    saveArray[1] = JSON.parse(k.SavedBenefit);
-      callback(saveArray[0], saveArray[1]);
+    var jobs;
+    var benefits;
+    
+    if (k.savedjob == null || k.savedjob == "null") {
+      jobs = []
+    } else {
+      jobs= JSON.parse(k.savedjob)
+    }
+    
+    if (k.savedbenefit == null || k.savedbenefit == "null") {
+      benefits = []
+    } else {
+      benefits= JSON.parse(k.savedbenefit)
+    } 
+    callback(jobs, benefits);
+  });
+}
+
+var getSave = function(user_id, callback){
+  Users.getUser(user_id, function(k){
+    var jobs;
+    var benefits;
+    
+    if (k.savedjob == null || k.savedjob == "null") {
+      jobs = []
+    } else {
+      jobs= JSON.parse(k.savedjob)
+    }
+    
+    if (k.savedbenefit == null || k.savedbenefit == "null") {
+      benefits = []
+    } else {
+      benefits= JSON.parse(k.savedbenefit)
+    } 
+    callback(jobs, benefits);
   });
 }

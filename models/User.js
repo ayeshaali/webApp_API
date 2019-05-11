@@ -18,7 +18,6 @@ exports.getUser = function(user_id, callback) {
     }
     callback(user);
   });
-  return true;
 }
 
 //creates a user
@@ -40,8 +39,8 @@ exports.createUser = function(name, pswd, callback) {
         var new_obj = {
           "Username": name.trim(),
           "Password": pswd.trim(),
-          "SavedJob": "",
-          "SavedBenefit":""
+          "SavedJob": "null",
+          "SavedBenefit":"null"
         }
         console.log(new_obj)
         dataJS.createRow(new_obj, 3, function(){

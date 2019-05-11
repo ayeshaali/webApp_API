@@ -39,7 +39,7 @@ router.get('/jobsearch/:user_id', function(req, res) {
       }
       else{
         console.error('error:'+err);
-        res.redirect('/searchJobs');
+        res.redirect('/searchJobs/'+req.params.user_id);
       }
     });
 })
@@ -48,7 +48,10 @@ router.get('/benefitsearch/:user_id', function(req, res) {
   request("http://localhost:3000/benefitsearch?apikey="+apikey+"&name="+req.query.name+"&type="+req.query.type+"&pop="+req.query.pop+"&contact="+req.query.contact+"&desc="+req.query.desc, function(err, response, body) {
       if(!err){
         var data = JSON.parse(body);
-        res.render('searchPrograms', {user:req.params.user_id, data: data})
+        var u = {
+          username: req.params.user_id
+        };
+        res.render('searchPrograms', {user:u, data: data})
       }
       else{
         res.redirect('/searchPrograms/'+req.params.user_id);
@@ -60,8 +63,11 @@ router.get("/jobs/:user_id/:id", function(req,res){
   request("http://localhost:3000/onejob?apikey="+apikey+"&id="+req.params.id, function(err, response, body) {
       if(!err){
         var data= JSON.parse(body)
-        Saved.saveInfo(req.params.user_id,data,"job", function(result){
-          res.render('mysaved', {data: result})
+        var u = {
+          username: req.params.user_id
+        };
+        Saved.saveInfo(req.params.user_id,data,1, function(jobsD, programsD){
+          res.render('mysaved', {user:u, jobs:jobsD, programs:programsD})
         });
       }
       else{
@@ -74,7 +80,7 @@ router.get("/benefits/:user_id/:id", function(req,res){
   request("http://localhost:3000/onebenefit?apikey="+apikey+"&id="+req.params.id, function(err, response, body) {
       if(!err){
         var data = JSON.parse(body);
-        Saved.saveInfo(req.params.user_id,data,"benefit", function(result){
+        Saved.saveInfo(req.params.user_id,data,2, function(result){
           res.render('mysaved', {data: result})
         });
       }
