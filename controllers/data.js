@@ -28,7 +28,7 @@ router.get('/searchJobs/:user_id', function(request, response) {
 })
 //search based on params (job)
 router.get('/jobsearch/:user_id', function(req, res) {
-  request("http://localhost:3000/jobsearch?apikey="+apikey+"&agency="+req.query.agency+"&title="+req.query.title+"&category="+req.query.category+"&service="+req.query.service+"&location="+req.query.location, function(err, response, body) {
+  request("https://apisky.herokuapp.com/jobsearch?apikey="+apikey+"&agency="+req.query.agency+"&title="+req.query.title+"&category="+req.query.category+"&service="+req.query.service+"&location="+req.query.location, function(err, response, body) {
       if(!err){
         var data = JSON.parse(body);
         console.log(data);
@@ -45,7 +45,7 @@ router.get('/jobsearch/:user_id', function(req, res) {
 })
 //search based on params (benefit)
 router.get('/benefitsearch/:user_id', function(req, res) {
-  request("http://localhost:3000/benefitsearch?apikey="+apikey+"&name="+req.query.name+"&type="+req.query.type+"&pop="+req.query.pop+"&contact="+req.query.contact+"&desc="+req.query.desc, function(err, response, body) {
+  request("https://apisky.herokuapp.com/benefitsearch?apikey="+apikey+"&name="+req.query.name+"&type="+req.query.type+"&pop="+req.query.pop+"&contact="+req.query.contact+"&desc="+req.query.desc, function(err, response, body) {
       if(!err){
         var data = JSON.parse(body);
         var u = {
@@ -60,7 +60,7 @@ router.get('/benefitsearch/:user_id', function(req, res) {
 })
 //save one job
 router.get("/jobs/:user_id/:id", function(req,res){
-  request("http://localhost:3000/onejob?apikey="+apikey+"&id="+req.params.id, function(err, response, body) {
+  request("https://apisky.herokuapp.com/onejob?apikey="+apikey+"&id="+req.params.id, function(err, response, body) {
       if(!err){
         var data= JSON.parse(body)
         var u = {
@@ -77,7 +77,7 @@ router.get("/jobs/:user_id/:id", function(req,res){
 })
 //save one benefit
 router.get("/benefits/:user_id/:id", function(req,res){
-  request("http://localhost:3000/onebenefit?apikey="+apikey+"&id="+req.params.id, function(err, response, body) {
+  request("https://apisky.herokuapp.com/onebenefit?apikey="+apikey+"&id="+req.params.id, function(err, response, body) {
       if(!err){
         var data = JSON.parse(body);
         Saved.saveInfo(req.params.user_id,data,2, function(result){
@@ -90,22 +90,7 @@ router.get("/benefits/:user_id/:id", function(req,res){
 
     });
 })
-//delete one job
-router.delete('/jobs/:id', function (req, res) {
-  saved.deleteJob(req.params.id, function(){
-    res.status(200);
-    res.setHeader('Content-Type', 'text/html')
-    res.render('mysaved');
-  });
-})
-//delete one benefit
-router.delete('/programs/:id', function (req, res) {
-  saved.deleteProgram(req.params.id, function(){
-    res.status(200);
-    res.setHeader('Content-Type', 'text/html')
-    res.render('mysaved');
-  });
-})
+
 //get all the saved stuff for the user
 router.get('/mysaved/:user_id', function(req, res) {
     Saved.getSave(req.params.user_id, function(jobData, programData){
@@ -132,7 +117,7 @@ router.get('/searchJobs', function(request, response) {
 })
 //search based on params (job)
 router.get('/jobsearch', function(req, res) {
-  request("http://localhost:3000/jobsearch?apikey="+apikey+"&agency="+req.query.agency+"&title="+req.query.title+"&category="+req.query.category+"&service="+req.query.service+"&location="+req.query.location, function(err, response, body) {
+  request("https://apisky.herokuapp.com/jobsearch?apikey="+apikey+"&agency="+req.query.agency+"&title="+req.query.title+"&category="+req.query.category+"&service="+req.query.service+"&location="+req.query.location, function(err, response, body) {
       if(!err){
         var data = JSON.parse(body);
         console.log(data);
@@ -149,7 +134,7 @@ router.get('/jobsearch', function(req, res) {
 })
 //search based on params (benefit)
 router.get('/benefitsearch', function(req, res) {
-  request("http://localhost:3000/benefitsearch?apikey="+apikey+"&name="+req.query.name+"&type="+req.query.type+"&pop="+req.query.pop+"&contact="+req.query.contact+"&desc="+req.query.desc, function(err, response, body) {
+  request("https://apisky.herokuapp.com/benefitsearch?apikey="+apikey+"&name="+req.query.name+"&type="+req.query.type+"&pop="+req.query.pop+"&contact="+req.query.contact+"&desc="+req.query.desc, function(err, response, body) {
       if(!err){
         var data = JSON.parse(body);
         var u = {
