@@ -98,7 +98,7 @@ router.get('/mysaved/:user_id', function(req, res) {
       res.setHeader('Content-Type', 'text/html')
       var u = {
         username: req.params.user_id
-      }
+      };
       res.render('mysaved', {jobs:jobData, programs: programData, user:u});
     });  
 })
